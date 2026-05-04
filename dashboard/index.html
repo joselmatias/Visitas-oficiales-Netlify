@@ -678,6 +678,18 @@
     object-position: center 15%;
     filter: saturate(0.82) contrast(1.05) brightness(0.9);
   }
+  .auth-photo--logo {
+    aspect-ratio: 3 / 1;
+    background: var(--ivory);
+    display: grid;
+    place-items: center;
+    padding: 20px 32px;
+  }
+  .auth-photo--logo::after { display: none; }
+  .auth-photo--logo img {
+    object-fit: contain;
+    filter: none;
+  }
   .auth-photo::after {
     content: ""; position: absolute; inset: 0;
     background:
@@ -915,8 +927,8 @@
     </div>
     <div class="detail-body">
       <div class="authority-card">
-        <div class="auth-photo">
-          <img src="assets/foto_alemania.jfif" alt="Superintendente"/>
+        <div class="auth-photo auth-photo--logo">
+          <img src="assets/logo_sce.png" alt="SCE"/>
         </div>
         <div class="auth-name">Hans W. <em>Ehmig Dillon</em></div>
         <div class="auth-title">Superintendente de Competencia Económica</div>
