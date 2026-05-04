@@ -12,7 +12,6 @@ window.VISITS = [
     eventLong: "Taller del Centro Regional de Competencia de la OCDE — <em>Ley de Competencia Económica</em>",
     organizer: "OCDE · Centro Regional de Competencia",
     brief: "Taller regional de capacitación en <em>aplicación de la ley de competencia</em>. Delegación SCE participa en mesas técnicas sobre carteles, abuso de posición dominante y control de concentraciones.",
-    photo: "assets/foto_colombia.jfif",
     stats: { dias: 3, sesiones: 8, distancia: 1540, delegacion: 4 }
   },
   {

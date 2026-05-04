@@ -204,9 +204,15 @@
     document.getElementById('m-s2').textContent = v.stats.sesiones;
     document.getElementById('m-s3').textContent = v.stats.distancia.toLocaleString();
     document.getElementById('m-s4').textContent = v.stats.delegacion;
+    const photoSection = document.querySelector('.m-photo');
     const img = document.getElementById('m-photo-img');
-    img.src = v.photo;
-    document.getElementById('m-photo-cap').textContent = `${v.capital} \u00b7 ${v.dateLong}`;
+    if (v.photo) {
+      photoSection.style.display = '';
+      img.src = v.photo;
+      document.getElementById('m-photo-cap').textContent = `${v.capital} \u00b7 ${v.dateLong}`;
+    } else {
+      photoSection.style.display = 'none';
+    }
     const flagEl = document.getElementById('m-flag');
     flagEl.innerHTML = '';
     flagEl.appendChild(renderFlag(v, { w: 80, h: 54 }));
