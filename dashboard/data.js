@@ -25,7 +25,6 @@ window.VISITS = [
     eventLong: "Foro Global de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Foro anual de máxima jerarquía en materia de competencia. Intervención institucional sobre <em>economía digital</em> y cooperación internacional en investigaciones transfronterizas.",
-    photo: "assets/foto_alemania.jfif",
     stats: { dias: 3, sesiones: 12, distancia: 9380, delegacion: 3 }
   },
   {
@@ -39,7 +38,6 @@ window.VISITS = [
     eventLong: "Jornada Abierta de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Sesión técnica abierta del Comité de Competencia. Agenda centrada en <em>regulación ex ante</em> de plataformas digitales y sostenibilidad.",
-    photo: "assets/foto_japon.jpg",
     stats: { dias: 1, sesiones: 5, distancia: 9380, delegacion: 2 }
   },
   {
@@ -53,7 +51,6 @@ window.VISITS = [
     eventLong: "Reunión Anual de la <em>International Competition Network</em> (ICN)",
     organizer: "ICN · Red Internacional de Competencia",
     brief: "Asamblea anual de autoridades de competencia de <em>140 jurisdicciones</em>. Participación en grupos de trabajo sobre carteles y abogacía de la competencia.",
-    photo: "assets/foto_alemania.jfif",
     stats: { dias: 3, sesiones: 14, distancia: 9420, delegacion: 5 }
   },
   {
@@ -67,7 +64,6 @@ window.VISITS = [
     eventLong: "Comité de Competencia de la OCDE — <em>Sesión Plenaria</em>",
     organizer: "OCDE · Sede Central",
     brief: "Sesión plenaria del Comité. Ecuador presenta avances del <em>examen de política de competencia</em> y dialoga sobre buenas prácticas en control de concentraciones.",
-    photo: "assets/foto_colombia.jfif",
     stats: { dias: 5, sesiones: 18, distancia: 9380, delegacion: 4 }
   },
   {
@@ -81,7 +77,6 @@ window.VISITS = [
     eventLong: "<em>13º Foro Internacional</em> de Competencia · KFTC",
     organizer: "Korea Fair Trade Commission",
     brief: "Foro bienal organizado por la KFTC. Intervención sobre <em>competencia en mercados digitales</em> emergentes y el rol de los reguladores en economías en desarrollo.",
-    photo: "assets/foto_japon.jpg",
     stats: { dias: 1, sesiones: 6, distancia: 15720, delegacion: 2 }
   },
   {
@@ -95,7 +90,6 @@ window.VISITS = [
     eventLong: "Diálogo Regional de Políticas de IA y Taller de Herramientas · <em>BID / OCDE</em>",
     organizer: "Banco Interamericano de Desarrollo & OCDE",
     brief: "Diálogo regional sobre <em>inteligencia artificial</em> aplicada a la política pública y competencia. Taller de herramientas metodológicas del BID para autoridades de la región.",
-    photo: "assets/foto_colombia.jfif",
     stats: { dias: 3, sesiones: 9, distancia: 1820, delegacion: 3 }
   },
   {
@@ -109,7 +103,6 @@ window.VISITS = [
     eventLong: "Jornada Abierta de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Jornada abierta con intervención de autoridades invitadas. Agenda provisional en <em>mercados digitales</em>, sostenibilidad y concentraciones transfronterizas.",
-    photo: "assets/foto_alemania.jfif",
     stats: { dias: 1, sesiones: 5, distancia: 9380, delegacion: 2 }
   },
   {
@@ -123,7 +116,6 @@ window.VISITS = [
     eventLong: "Reunión de Primavera del <em>American Bar Association</em> — Sección Antitrust",
     organizer: "American Bar Association · Antitrust Law Section",
     brief: "Reunión anual de la Sección Antitrust del ABA. Participación en paneles sobre <em>enforcement internacional</em>, economía conductual y precedentes regulatorios.",
-    photo: "assets/foto_colombia.jfif",
     stats: { dias: 3, sesiones: 22, distancia: 4210, delegacion: 3 }
   }
 ];
