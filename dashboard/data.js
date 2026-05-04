@@ -12,7 +12,7 @@ window.VISITS = [
     eventLong: "Taller del Centro Regional de Competencia de la OCDE — <em>Ley de Competencia Económica</em>",
     organizer: "OCDE · Centro Regional de Competencia",
     brief: "Taller regional de capacitación en <em>aplicación de la ley de competencia</em>. Delegación SCE participa en mesas técnicas sobre carteles, abuso de posición dominante y control de concentraciones.",
-    stats: { dias: 3, sesiones: 8, distancia: 1540, delegacion: 4 }
+    stats: { dias: 3, distancia: 1540 }
   },
   {
     code: "FRA", name: "Francia", capital: "París",

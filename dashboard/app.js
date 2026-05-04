@@ -201,9 +201,7 @@
     document.getElementById('m-event').innerHTML = v.eventLong;
     document.getElementById('m-organizer').textContent = v.organizer;
     document.getElementById('m-s1').textContent = v.stats.dias;
-    document.getElementById('m-s2').textContent = v.stats.sesiones;
     document.getElementById('m-s3').textContent = v.stats.distancia.toLocaleString();
-    document.getElementById('m-s4').textContent = v.stats.delegacion;
     const photoSection = document.querySelector('.m-photo');
     const img = document.getElementById('m-photo-img');
     if (v.photo) {
