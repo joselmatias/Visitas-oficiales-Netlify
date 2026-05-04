@@ -25,7 +25,7 @@ window.VISITS = [
     eventLong: "Foro Global de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Foro anual de máxima jerarquía en materia de competencia. Intervención institucional sobre <em>economía digital</em> y cooperación internacional en investigaciones transfronterizas.",
-    stats: { dias: 3, sesiones: 12, distancia: 9380, delegacion: 3 }
+    stats: { dias: 3, distancia: 9380 }
   },
   {
     code: "FRA-2", name: "Francia", capital: "París",
@@ -38,7 +38,7 @@ window.VISITS = [
     eventLong: "Jornada Abierta de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Sesión técnica abierta del Comité de Competencia. Agenda centrada en <em>regulación ex ante</em> de plataformas digitales y sostenibilidad.",
-    stats: { dias: 1, sesiones: 5, distancia: 9380, delegacion: 2 }
+    stats: { dias: 1, distancia: 9380 }
   },
   {
     code: "GBR", name: "Escocia / R. Unido", capital: "Edimburgo",
@@ -51,7 +51,7 @@ window.VISITS = [
     eventLong: "Reunión Anual de la <em>International Competition Network</em> (ICN)",
     organizer: "ICN · Red Internacional de Competencia",
     brief: "Asamblea anual de autoridades de competencia de <em>140 jurisdicciones</em>. Participación en grupos de trabajo sobre carteles y abogacía de la competencia.",
-    stats: { dias: 3, sesiones: 14, distancia: 9420, delegacion: 5 }
+    stats: { dias: 3, distancia: 9420 }
   },
   {
     code: "FRA-3", name: "Francia", capital: "París",
@@ -64,7 +64,7 @@ window.VISITS = [
     eventLong: "Comité de Competencia de la OCDE — <em>Sesión Plenaria</em>",
     organizer: "OCDE · Sede Central",
     brief: "Sesión plenaria del Comité. Ecuador presenta avances del <em>examen de política de competencia</em> y dialoga sobre buenas prácticas en control de concentraciones.",
-    stats: { dias: 5, sesiones: 18, distancia: 9380, delegacion: 4 }
+    stats: { dias: 5, distancia: 9380 }
   },
   {
     code: "KOR", name: "Corea del Sur", capital: "Seúl",
@@ -77,7 +77,7 @@ window.VISITS = [
     eventLong: "<em>13º Foro Internacional</em> de Competencia · KFTC",
     organizer: "Korea Fair Trade Commission",
     brief: "Foro bienal organizado por la KFTC. Intervención sobre <em>competencia en mercados digitales</em> emergentes y el rol de los reguladores en economías en desarrollo.",
-    stats: { dias: 1, sesiones: 6, distancia: 15720, delegacion: 2 }
+    stats: { dias: 1, distancia: 15720 }
   },
   {
     code: "CRI", name: "Costa Rica", capital: "San José",
@@ -90,7 +90,7 @@ window.VISITS = [
     eventLong: "Diálogo Regional de Políticas de IA y Taller de Herramientas · <em>BID / OCDE</em>",
     organizer: "Banco Interamericano de Desarrollo & OCDE",
     brief: "Diálogo regional sobre <em>inteligencia artificial</em> aplicada a la política pública y competencia. Taller de herramientas metodológicas del BID para autoridades de la región.",
-    stats: { dias: 3, sesiones: 9, distancia: 1820, delegacion: 3 }
+    stats: { dias: 3, distancia: 1820 }
   },
   {
     code: "FRA-4", name: "Francia", capital: "París",
@@ -103,7 +103,7 @@ window.VISITS = [
     eventLong: "Jornada Abierta de Competencia de la OCDE",
     organizer: "OCDE · Sede Central",
     brief: "Jornada abierta con intervención de autoridades invitadas. Agenda provisional en <em>mercados digitales</em>, sostenibilidad y concentraciones transfronterizas.",
-    stats: { dias: 1, sesiones: 5, distancia: 9380, delegacion: 2 }
+    stats: { dias: 1, distancia: 9380 }
   },
   {
     code: "USA", name: "Estados Unidos", capital: "Washington D.C.",
@@ -116,7 +116,7 @@ window.VISITS = [
     eventLong: "Reunión de Primavera del <em>American Bar Association</em> — Sección Antitrust",
     organizer: "American Bar Association · Antitrust Law Section",
     brief: "Reunión anual de la Sección Antitrust del ABA. Participación en paneles sobre <em>enforcement internacional</em>, economía conductual y precedentes regulatorios.",
-    stats: { dias: 3, sesiones: 22, distancia: 4210, delegacion: 3 }
+    stats: { dias: 3, distancia: 4210 }
   }
 ];
 
