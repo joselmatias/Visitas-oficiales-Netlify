@@ -669,7 +669,8 @@ window.addEventListener('visit:focus', (e) => {
   zoomStart = camera.position.clone();
   zoomTarget = camPos;
   zoomT = 0;
-  // Plane animation — all countries
+  // Plane animation — reset and restart from Ecuador on every hover
+  planeAnim = null;
   const arc = arcs.find(a => a.data.code === code);
   if (arc) {
     planeMarker.visible = true;
@@ -738,7 +739,7 @@ function animate() {
     planeMarker.setRotationFromMatrix(new THREE.Matrix4().makeBasis(right, corrUp, tangent));
     if (planeAnim.t >= 1) {
       planeAnim = null;
-      setTimeout(() => { planeMarker.visible = false; }, 700);
+      setTimeout(() => { if (!planeAnim) planeMarker.visible = false; }, 700);
     }
   }
 
