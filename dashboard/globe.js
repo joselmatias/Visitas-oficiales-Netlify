@@ -566,11 +566,34 @@ function buildArcsAndMarkers() {
     destinationMarkers.push({ mesh: dot, ring, data: v });
     arcs.push({
       line, material: arcMat, progress: 0, offset: i * 0.7,
-      data: v, end
+      data: v, end, curve
     });
   });
 }
 buildArcsAndMarkers();
+
+// ---------- Airplane marker ----------
+function makePlaneMarker() {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshBasicMaterial({ color: GOLD });
+  g.add(new THREE.Mesh(new THREE.BoxGeometry(0.004, 0.004, 0.042), mat));
+  const wings = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.0015, 0.013), mat);
+  wings.position.z = 0.004;
+  g.add(wings);
+  const hStab = new THREE.Mesh(new THREE.BoxGeometry(0.024, 0.0015, 0.008), mat);
+  hStab.position.z = -0.018;
+  g.add(hStab);
+  const vStab = new THREE.Mesh(new THREE.BoxGeometry(0.0015, 0.013, 0.008), mat);
+  vStab.position.z = -0.018;
+  g.add(vStab);
+  return g;
+}
+const planeMarker = makePlaneMarker();
+planeMarker.visible = false;
+globeGroup.add(planeMarker);
+
+let planeAnim = null;
+const PLANE_SPEED = 0.38;
 
 // ---------- Hit-testing ----------
 const raycaster = new THREE.Raycaster();
@@ -646,6 +669,12 @@ window.addEventListener('visit:focus', (e) => {
   zoomStart = camera.position.clone();
   zoomTarget = camPos;
   zoomT = 0;
+  // Plane animation — all countries
+  const arc = arcs.find(a => a.data.code === code);
+  if (arc) {
+    planeMarker.visible = true;
+    planeAnim = { curve: arc.curve, t: 0 };
+  }
 });
 
 window.addEventListener('visit:resetview', () => {
@@ -654,6 +683,8 @@ window.addEventListener('visit:resetview', () => {
   zoomTarget = new THREE.Vector3(0, 0.4, 2.8);
   zoomT = 0;
   setHighlight(null);
+  planeMarker.visible = false;
+  planeAnim = null;
 });
 
 // ---------- Resize ----------
@@ -694,6 +725,22 @@ function animate() {
       obj.material.opacity = 0.45 * (1 - (s - 1));
     }
   });
+
+  // Airplane animation
+  if (planeAnim) {
+    planeAnim.t = Math.min(1, planeAnim.t + dt * PLANE_SPEED);
+    const p = planeAnim.curve.getPoint(planeAnim.t);
+    const tangent = planeAnim.curve.getTangent(planeAnim.t).normalize();
+    planeMarker.position.copy(p);
+    const up = p.clone().normalize();
+    const right = new THREE.Vector3().crossVectors(tangent, up).normalize();
+    const corrUp = new THREE.Vector3().crossVectors(right, tangent).normalize();
+    planeMarker.setRotationFromMatrix(new THREE.Matrix4().makeBasis(right, corrUp, tangent));
+    if (planeAnim.t >= 1) {
+      planeAnim = null;
+      setTimeout(() => { planeMarker.visible = false; }, 700);
+    }
+  }
 
   // Zoom camera lerp
   if (zoomTarget && zoomStart) {
