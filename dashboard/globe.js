@@ -669,13 +669,14 @@ window.addEventListener('visit:focus', (e) => {
   zoomStart = camera.position.clone();
   zoomTarget = camPos;
   zoomT = 0;
-  // Plane animation — reset and restart from Ecuador on every hover
+});
+
+window.addEventListener('plane:launch', (e) => {
+  const arc = arcs.find(a => a.data.code === e.detail);
+  if (!arc) return;
   planeAnim = null;
-  const arc = arcs.find(a => a.data.code === code);
-  if (arc) {
-    planeMarker.visible = true;
-    planeAnim = { curve: arc.curve, t: 0 };
-  }
+  planeMarker.visible = true;
+  planeAnim = { curve: arc.curve, t: 0 };
 });
 
 window.addEventListener('visit:resetview', () => {

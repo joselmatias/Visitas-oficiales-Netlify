@@ -161,7 +161,10 @@
         focusVisit(v.code);
         setTimeout(() => openModal(globalIdx), 600);
       });
-      row.addEventListener('mouseenter', () => focusVisit(v.code, false));
+      row.addEventListener('mouseenter', () => {
+        focusVisit(v.code);
+        window.dispatchEvent(new CustomEvent('plane:launch', { detail: v.code }));
+      });
       list.appendChild(row);
     });
   }
