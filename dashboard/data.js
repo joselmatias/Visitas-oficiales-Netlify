@@ -134,7 +134,7 @@ window.VISITS = [
   {
     code: "GBR-2", name: "Reino Unido", capital: "Londres",
     lat: 51.5074, lon: -0.1278,
-    date: "2026-06-22", dateLong: "22 — 26 JUN 2026",
+    date: "2026-06-21", dateLong: "21 — 26 JUN 2026",
     type: "mision",
     expediente: "NO CONSIGNADO",
     flag: { type: "uk", colors: ["#012169", "#FFFFFF", "#C8102E"] },
@@ -142,7 +142,7 @@ window.VISITS = [
     eventLong: "<em>Business Mission 2026</em> · Environmental, Social and Governance",
     organizer: "Cámara Ecuatoriano Británica · Embajada Británica",
     brief: "Misión empresarial en la London Climate Action Week. Participación institucional y promoción del Ecuador como <em>destino estratégico para inversión sostenible</em> internacional.",
-    stats: { dias: 5, distancia: 9220 }
+    stats: { dias: 6, distancia: 9220 }
   },
   {
     code: "DOM", name: "República Dominicana", capital: "Santo Domingo",
