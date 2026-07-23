@@ -119,6 +119,19 @@ window.VISITS = [
     stats: { dias: 3, distancia: 4210 }
   },
   {
+    code: "USA-2", name: "Estados Unidos", capital: "Miami",
+    lat: 25.7617, lon: -80.1918,
+    date: "2026-03-31", dateLong: "31 MAR 2026",
+    type: "reunion",
+    expediente: "NO CONSIGNADO",
+    flag: { type: "usa", colors: ["#B22234", "#FFFFFF", "#3C3B6E"] },
+    event: "Reunión institucional en Miami-Dade",
+    eventLong: "Reunión institucional con <em>Christian Ceballos</em> · Miami-Dade",
+    organizer: "SCE · Condado de Miami-Dade",
+    brief: "Reunión en Florida con el concejal Christian Ceballos para promover <em>mercados eficientes, comercio justo</em> y oportunidades de bienestar para los ecuatorianos.",
+    stats: { dias: 1, distancia: 2890 }
+  },
+  {
     code: "GBR-2", name: "Reino Unido", capital: "Londres",
     lat: 51.5074, lon: -0.1278,
     date: "2026-06-21", dateLong: "21 — 26 JUN 2026",
