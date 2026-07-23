@@ -117,6 +117,19 @@ window.VISITS = [
     organizer: "American Bar Association · Antitrust Law Section",
     brief: "Reunión anual de la Sección Antitrust del ABA. Participación en paneles sobre <em>enforcement internacional</em>, economía conductual y precedentes regulatorios.",
     stats: { dias: 3, distancia: 4210 }
+  },
+  {
+    code: "GBR-2", name: "Reino Unido", capital: "Londres",
+    lat: 51.5074, lon: -0.1278,
+    date: "2026-06-21", dateLong: "21 — 26 JUN 2026",
+    type: "mision",
+    expediente: "NO CONSIGNADO",
+    flag: { type: "uk", colors: ["#012169", "#FFFFFF", "#C8102E"] },
+    event: "Business Mission 2026 · ESG",
+    eventLong: "<em>Business Mission 2026</em> · Environmental, Social and Governance",
+    organizer: "Cámara Ecuatoriano Británica · Embajada Británica",
+    brief: "Misión empresarial en la London Climate Action Week. Participación institucional y promoción del Ecuador como <em>destino estratégico para inversión sostenible</em> internacional.",
+    stats: { dias: 6, distancia: 9220 }
   }
 ];
 
