@@ -575,7 +575,8 @@ buildArcsAndMarkers();
 // ---------- Airplane marker ----------
 function makePlaneMarker() {
   const g = new THREE.Group();
-  const mat = new THREE.MeshBasicMaterial({ color: GOLD });
+  // depthTest: false → el avión es visible incluso cuando está detrás del globo
+  const mat = new THREE.MeshBasicMaterial({ color: GOLD, depthTest: false });
   g.add(new THREE.Mesh(new THREE.BoxGeometry(0.004, 0.004, 0.042), mat));
   const wings = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.0015, 0.013), mat);
   wings.position.z = 0.004;
@@ -589,11 +590,17 @@ function makePlaneMarker() {
   return g;
 }
 const planeMarker = makePlaneMarker();
+// renderOrder alto → se renderiza después del globo, siempre visible encima
+planeMarker.traverse(obj => { if (obj.isMesh) obj.renderOrder = 999; });
 planeMarker.visible = false;
 globeGroup.add(planeMarker);
 
 let planeAnim = null;
+let planeHideTimeout = null;
 const PLANE_SPEED = 0.38;
+
+let cameraPhase = null;     // 'to-ecuador' | 'to-dest' | null
+let cameraDestTarget = null;
 
 // ---------- Hit-testing ----------
 const raycaster = new THREE.Raycaster();
@@ -641,6 +648,25 @@ let zoomStart = null;
 let zoomT = 0;
 let highlightedCode = null;
 
+// Calcula la posición de cámara óptima para ver la ruta Ecuador → destino.
+// Rutas cortas (≤90°): 70 % hacia el destino — el destino queda prominente.
+// Rutas largas (>90°): desplaza el bias según la distancia para que Ecuador
+// siga siendo visible dentro del hemisferio de la cámara.
+function routeCamPos(destLat, destLon) {
+  const origDir = latLonToVec3(ORIGIN.lat, ORIGIN.lon, 1).normalize();
+  const destDir = latLonToVec3(destLat, destLon, 1).normalize();
+  const theta = Math.acos(Math.max(-1, Math.min(1, origDir.dot(destDir))));
+  // Peso hacia destino: 70 % para rutas cortas, baja linealmente a 50 % a 180°
+  const dw = Math.max(0.50, 0.70 - 0.20 * (theta / Math.PI));
+  const blend = origDir.clone().multiplyScalar(1 - dw).add(destDir.clone().multiplyScalar(dw));
+  if (blend.length() < 0.01) return new THREE.Vector3(0, 4.5, 0);
+  blend.normalize();
+  // Distancia mínima para que Ecuador quede dentro del hemisferio visible
+  const cosHalf = Math.max(0.05, origDir.dot(blend));
+  const camDist = Math.min(4.5, Math.max(2.3, (1.0 / cosHalf) + 0.5));
+  return blend.multiplyScalar(camDist);
+}
+
 function setHighlight(code) {
   highlightedCode = code;
   arcs.forEach(a => {
@@ -658,25 +684,43 @@ window.addEventListener('visit:focus', (e) => {
   const visit = window.VISITS.find(v => v.code === code);
   if (!visit) return;
   setHighlight(code);
-  const target = latLonToVec3(visit.lat, visit.lon, 1);
-  // Offset camera to look from outside that point
-  const camDist = 2.3;
-  const camPos = target.clone().normalize().multiplyScalar(camDist);
-  // Bias so the arc is visible: average with origin direction
-  const origin = latLonToVec3(ORIGIN.lat, ORIGIN.lon, 1).normalize();
-  camPos.add(origin.multiplyScalar(0.3)).normalize().multiplyScalar(camDist);
+
+  // Si hay animación de avión activa, ella maneja la cámara
+  if (cameraPhase) return;
+
   controls.autoRotate = false;
   zoomStart = camera.position.clone();
-  zoomTarget = camPos;
+  zoomTarget = routeCamPos(visit.lat, visit.lon);
   zoomT = 0;
 });
 
 window.addEventListener('plane:launch', (e) => {
   const arc = arcs.find(a => a.data.code === e.detail);
   if (!arc) return;
+  if (planeHideTimeout !== null) {
+    clearTimeout(planeHideTimeout);
+    planeHideTimeout = null;
+  }
+
+  // Cámara fase 1: ir rápido a Ecuador
+  const origDir = latLonToVec3(ORIGIN.lat, ORIGIN.lon, 1).normalize();
+  const ecuadorCam = origDir.clone().multiplyScalar(2.3);
+
+  // Cámara fase 2: posición óptima según distancia de la ruta
+  const destCam = routeCamPos(arc.data.lat, arc.data.lon);
+
+  zoomStart = camera.position.clone();
+  zoomTarget = ecuadorCam;
+  zoomT = 0;
+  cameraPhase = 'to-ecuador';
+  cameraDestTarget = destCam;
+  controls.autoRotate = false;
+
+  // Avión: reiniciar desde Ecuador
   planeAnim = null;
   planeMarker.visible = true;
   planeAnim = { curve: arc.curve, t: 0 };
+  planeMarker.position.copy(arc.curve.getPoint(0));
 });
 
 window.addEventListener('visit:resetview', () => {
@@ -684,7 +728,13 @@ window.addEventListener('visit:resetview', () => {
   zoomStart = camera.position.clone();
   zoomTarget = new THREE.Vector3(0, 0.4, 2.8);
   zoomT = 0;
+  cameraPhase = null;
+  cameraDestTarget = null;
   setHighlight(null);
+  if (planeHideTimeout !== null) {
+    clearTimeout(planeHideTimeout);
+    planeHideTimeout = null;
+  }
   planeMarker.visible = false;
   planeAnim = null;
 });
@@ -740,17 +790,34 @@ function animate() {
     planeMarker.setRotationFromMatrix(new THREE.Matrix4().makeBasis(right, corrUp, tangent));
     if (planeAnim.t >= 1) {
       planeAnim = null;
-      setTimeout(() => { if (!planeAnim) planeMarker.visible = false; }, 700);
+      planeHideTimeout = setTimeout(() => {
+        planeHideTimeout = null;
+        if (!planeAnim) planeMarker.visible = false;
+      }, 700);
     }
   }
 
-  // Zoom camera lerp
+  // Zoom camera lerp (dos fases cuando hay animación de avión)
   if (zoomTarget && zoomStart) {
-    zoomT = Math.min(1, zoomT + dt * 1.2);
-    const e = 1 - Math.pow(1 - zoomT, 3);
-    camera.position.lerpVectors(zoomStart, zoomTarget, e);
+    const zoomSpeed = cameraPhase === 'to-ecuador' ? 3.0 : 0.9;
+    zoomT = Math.min(1, zoomT + dt * zoomSpeed);
+    const ease = 1 - Math.pow(1 - zoomT, 3);
+    camera.position.lerpVectors(zoomStart, zoomTarget, ease);
     controls.update();
-    if (zoomT >= 1) { zoomStart = null; zoomTarget = null; }
+    if (zoomT >= 1) {
+      if (cameraPhase === 'to-ecuador' && cameraDestTarget) {
+        // Fase 2: Ecuador → destino
+        zoomStart = camera.position.clone();
+        zoomTarget = cameraDestTarget;
+        cameraDestTarget = null;
+        cameraPhase = 'to-dest';
+        zoomT = 0;
+      } else {
+        zoomStart = null;
+        zoomTarget = null;
+        cameraPhase = null;
+      }
+    }
   } else {
     controls.update();
   }
