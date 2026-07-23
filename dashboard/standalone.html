@@ -535,7 +535,7 @@
     padding: 32px 38px 26px;
     border-bottom: 1px solid var(--line);
     display: grid;
-    grid-template-columns: 80px 1fr auto;
+    grid-template-columns: 80px 1fr;
     gap: 22px;
     align-items: center;
   }
@@ -560,17 +560,6 @@
   .modal-head .m-title h1 em {
     font-style: italic; color: var(--gold-hi); font-weight: 400;
   }
-  .modal-head .m-stamp {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px; letter-spacing: 0.18em;
-    color: var(--muted-2);
-    text-align: right;
-    line-height: 1.8;
-    padding-right: 36px;
-    text-transform: uppercase;
-  }
-  .modal-head .m-stamp .stamp-val { color: var(--ivory); }
-
   .modal-body {
     display: grid;
     grid-template-columns: 1.15fr 1fr;
@@ -986,11 +975,8 @@
         <div class="kick" id="m-kick">Visita Oficial</div>
         <h1 id="m-title">—</h1>
       </div>
-      <div class="m-stamp">
-        <div>Expediente<br><span class="stamp-val" id="m-expediente">—</span></div>
-        <div style="margin-top:8px">Clasificación<br><span class="stamp-val">USO OFICIAL</span></div>
-      </div>
     </div>
+    <span id="m-expediente" hidden></span>
     <div class="modal-body">
       <div class="modal-col">
         <div class="m-photo">
